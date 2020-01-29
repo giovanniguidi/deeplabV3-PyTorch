@@ -1,0 +1,52 @@
+dataset:
+    base_path: "../../datasets/DeepFashion2"
+    dataset_name: "deepfashion"   
+image:
+    out_stride: 16
+    base_size: 513
+    crop_size: 513
+network:
+    backbone: "resnet"  #choices=['resnet', 'xception', 'drn', 'mobilenet']
+    sync_bn: false
+    freeze_bn: false
+    use_cuda: true
+    num_classes: 14
+training:
+    workers: 4
+    loss_type: "ce"   #choices=['ce', 'focal']
+    epochs: 50
+    start_epoch: 0
+    batch_size: 2
+    use_balanced_weights: false
+    lr: 0.0005
+    lr_scheduler: "poly"     #choices=['poly', 'step', 'cos']
+    momentum: 0.9
+    weight_decay: 0.0005
+    nesterov: false
+    callbacks:
+    weights_initialization: 
+        use_pretrained_weights: false
+        restore_from: "./experiments/checkpoint_last.pth.tar"
+    model_best_checkpoint: 
+        enabled: true
+        out_file: "./experiments/checkpoint_best.pth.tar"
+        monitor: "val_loss"
+    model_last_checkpoint: 
+        enabled: true
+        out_file: "./experiments/checkpoint_last.pth.tar"        
+    train_on_subset: 
+        enabled: true
+        dataset_fraction: 0.1   
+    output:
+        output_weights: "./snapshots/checkpoint_best.pth.tar"
+    tensorboard: 
+        enabled: false
+        log_dir: "./tensorboard/"
+    no_val: false
+    val_interval: 1
+inference:
+    batch_size: 2
+#gpu_ids: 0
+#seed: 1
+#ft: false
+#no_val: false

@@ -1,0 +1,14 @@
+**/.ipynb_checkpoints/*
+**.log
+*.pyc
+*/*.pyc
+*/**/__pycache__/*
+datasets/words*
+tensorboard/*
+old/
+snapshots/*
+experiments/*
+!.gitkeep
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+run/*
