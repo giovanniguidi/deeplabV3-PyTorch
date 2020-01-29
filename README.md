@@ -7,7 +7,7 @@ This algorithm is here applied to the DeepFashion2 dataset (Ge et al. 2019), one
 dataset contains 491K images of 13 popular clothing categories with bounding boxes, and almost 185K images with segmentation, from both commercial shopping stores and consumers.
 
 DeepLabV3+ model is very complex, but the biggest difference compared to other models is the use of "atrous convolutions" in the encoder (which was already suggested in the first DeepLab model by Chen et al. 2016), in a configuration called Atrous Spatial Pyramid Pooling (ASPP). ASPP is composed by different atrous convolution layers in parallel with a different atrous rate, allowing to capture information at multiple scales and extract denser 
-feature maps (see the paper for details).  
+feature maps (see the image below and the paper for details).  
 
 ![picture alt](https://github.com/giovanniguidi/deeplabV3_Pytorch/blob/master/docs/deeplab.png "")
 
@@ -31,7 +31,7 @@ Install the dependencies by:
 pip install -r requirements.txt 
 ```
 
-## Data
+## Dataset
 
 Download the dataset from: 
 
@@ -58,7 +58,7 @@ The trained weights can be found here:
 https://drive.google.com/drive/folders/1O8KLZa1AABlLS6DlkkzHOgPqvT89GB_9?usp=sharing
 
 
-The model can be trained with different backbones (resnet, xception, drn, mobilenet). The weights on the Drive has been trained with the resnet backbone, so if you want to use another backbone you need to train from scratch (although the backbone weights are pre-trained on ImageNet).
+The model can be trained with different backbones (resnet, xception, drn, mobilenet). The weights on the Drive has been trained with the ResNet backbone, so if you want to use another backbone you need to train from scratch (although the backbone weights are always pre-trained on ImageNet).
 
 
 ## Train
@@ -95,7 +95,7 @@ You can also check the "inference.ipynb" notebook for visual assessing the predi
 
 Here is an example of the results:
 
-![picture alt](https://github.com/giovanniguidi/deeplabV3_Pytorch/blob/master/docs/sample.jpg "")
+![picture alt](https://github.com/giovanniguidi/deeplabV3_Pytorch/blob/master/docs/sample.png "")
 
 
 On the test set we get this metrics:
@@ -110,7 +110,7 @@ freq weighted IoU: 0.79
 
 ## Train on other data
 
-This implementation can be easily extended to other dataset. The expected input are .jpg images, and the labels must be in .png format, with 1 channel shape (y_size, x_size) and pixel value corresponding to the target class. In principle you only need to modify deepfashion.py file in data_generators.  
+This implementation can be easily used on other dataset. The expected input of the model are .jpg images, and the labels are in .png format, with 1 channel (shape (y_size, x_size)), and pixel value corresponding to the target class. In principle you only need to modify the data_generator.  
  
 
 ## References
