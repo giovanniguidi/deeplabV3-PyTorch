@@ -1,4 +1,4 @@
-# DeepLab V3+ Network for Semantic Segmentation in fashion 
+# DeepLab V3+ Network for Semantic Segmentation on DeepFashion2 
 
 This project is based on one of the state-of-the-art algorithms for semantic segmentation, DeepLabV3+ by the Google research group (Chen et al. 2018, https://arxiv.org/abs/1802.02611). Semantic segmentation is the task of predicting for each pixel of an image a "semantic" label, such as tree, street, sky, car (and of course background). 
 
