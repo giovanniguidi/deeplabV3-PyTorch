@@ -115,7 +115,7 @@ freq weighted IoU: 0.79
 
 ## Train on other data
 
-This implementation can be easily used on other dataset. The expected input of the model are .jpg images, and the labels are in .png format, with 1 channel (shape (y_size, x_size)), and pixel value corresponding to the target class. In principle you only need to modify the data_generator.  
+This implementation can be easily used on other dataset. The expected input of the model are .jpg images, and the labels are in .png format, with 1 channel (i.e. shape = (y_size, x_size)), and pixel value corresponding to the target class. In principle you only need to modify the data_generator.  
  
 
 ## References
