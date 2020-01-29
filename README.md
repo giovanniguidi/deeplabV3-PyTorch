@@ -10,7 +10,7 @@ DeepLabV3+ model is very complex, but the biggest difference compared to other m
 feature maps (see the image below and the paper for details).  
 
 ![picture alt](https://github.com/giovanniguidi/deeplabV3_Pytorch/blob/master/docs/deeplab.png "")
-
+*Fig. 1: DeepLabV3+ model (source Chen et al. 2018)*
 
 ## Virtual environment
 First you need to create a virtual environment. 
