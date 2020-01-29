@@ -9,8 +9,11 @@ dataset contains 491K images of 13 popular clothing categories with bounding box
 DeepLabV3+ model is very complex, but the biggest difference compared to other models is the use of "atrous convolutions" in the encoder (which was already suggested in the first DeepLab model by Chen et al. 2016), in a configuration called Atrous Spatial Pyramid Pooling (ASPP). ASPP is composed by different atrous convolution layers in parallel with a different atrous rate, allowing to capture information at multiple scales and extract denser 
 feature maps (see the image below and the paper for details).  
 
-![picture alt](https://github.com/giovanniguidi/deeplabV3_Pytorch/blob/master/docs/deeplab.png "")
-*Fig. 1: DeepLabV3+ model (source Chen et al. 2018)*
+<p align="center">
+  <img src="https://github.com/giovanniguidi/deeplabV3_Pytorch/blob/master/docs/deeplab.png">
+  Fig. 1: DeepLabV3+ model (source Chen et al. 2018)
+</p>
+
 
 ## Virtual environment
 First you need to create a virtual environment. 
@@ -95,12 +98,9 @@ You can also check the "inference.ipynb" notebook for visual assessing the predi
 
 Here is an example of the results:
 
-![picture alt](https://github.com/giovanniguidi/deeplabV3_Pytorch/blob/master/docs/sample.png "")
-*Fig. 2: Prediction on DeepFashion2*
-
 <p align="center">
   <img src="https://github.com/giovanniguidi/deeplabV3_Pytorch/blob/master/docs/sample.png">
-  This is an image
+  Fig. 2: Prediction on DeepFashion2
 </p>
 
 On the test set we get this metrics:
