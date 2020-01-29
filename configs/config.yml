@@ -25,7 +25,7 @@ training:
     nesterov: false
     callbacks:
     weights_initialization: 
-        use_pretrained_weights: false
+        use_pretrained_weights: true
         restore_from: "./experiments/checkpoint_last.pth.tar"
     model_best_checkpoint: 
         enabled: true

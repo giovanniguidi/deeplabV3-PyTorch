@@ -1,64 +1,64 @@
-# DeepLab V3+ Network for Semantic Segmentation
+# DeepLab V3+ Network for Semantic Segmentation in fashion 
 
-This project is an application of a segmenting segmentation algorithm to the DeepFashion2 dataset 
-(Ge et al. 2019), containing images of 13 popular clothing categories from both commercial shopping stores and consumers.
-
-
-The task this class of algorithms want to 
-solve is "semantic segmentation", i.e. given a picture assign each pixel a "semantic" label, such as tree, street, sky, car. 
+This project is based on one of the state-of-the-art algorithms for semantic segmentation, DeepLabV3+ by the Google research group (Chen et al. 2018, https://arxiv.org/abs/1802.02611). Semantic segmentation is the task of predicting for each pixel of an image a "semantic" label, such as tree, street, sky, car (and of course background). 
 
 
-We use the DeepLab V3+ Network for Semantic Segmentation model (Chen et al. 2018, https://arxiv.org/abs/1802.02611), one of the state-of-the-art models
-in semantic segmentation 
+This algorithm is here applied to the DeepFashion2 dataset (Ge et al. 2019), one of the most popular dataset used by fashion research groups. The 
+dataset contains 491K images of 13 popular clothing categories with bounding boxes, and almost 185K images with segmentation, from both commercial shopping stores and consumers.
 
+DeepLabV3+ model is very complex, but the biggest difference compared to other models is the use of "atrous convolutions" in the encoder (which was already suggested in the first DeepLab model by Chen et al. 2016), in a configuration called Atrous Spatial Pyramid Pooling (ASPP). ASPP is composed by different atrous convolution layers in parallel with a different atrous rate, allowing to capture information at multiple scales and extract denser 
+feature maps (see the paper for details).  
 
-![picture alt](https://github.com/giovanniguidi/FCN-keras/blob/master/figures/semantic_segmentation.jpg "")
+![picture alt](https://github.com/giovanniguidi/deeplabV3_Pytorch/blob/master/docs/deeplab.png "")
+
 
 ## Virtual environment
-First you need to create a virtual environment (using Conda for instance) by:
+First you need to create a virtual environment. 
+
+Using Conda you can type:
+
 ```
 conda create --name deeplab --python==3.7.1
 conda activate deeplab
 ```
 
 
-## Depencencies
+## Dependencies
+This project is based on the PyTorch Deep Learning library. 
 
-Install the libraries using:
+Install the dependencies by:
 ```
 pip install -r requirements.txt 
 ```
 
 ## Data
 
-
-To download the dataset go to: 
+Download the dataset from: 
 
 https://github.com/switchablenorms/DeepFashion2
 
-and download all the images.
 
-To convert the labels in ones useful for semantic segmentation (in this case .png images, where the value of each pixel is the cloth class), you need
-to convert the segmentation points into the proper format. This has already been done, so you can download the folder from
+Before using those data you need to convert the labels in a format which can seamless enter into a semantic segmentation algorithm. In this case we use .png images, where the value of each pixel is the cloth class (so from 1 to 13), but other choices are possible. The background class has value 0.
 
+You need to create a script to convert the polygons in DeepFashion2 labels into a proper format for the algorithm, or you can download the labels from:
 
 https://drive.google.com/drive/folders/1O8KLZa1AABlLS6DlkkzHOgPqvT89GB_9?usp=sharing
 
-which also contain the train/val/test split
 
+This folder contains also the train/val/test split json in case you want to use the same split I used.
 
-![picture alt](https://github.com/giovanniguidi/FCN-keras/blob/master/test_images/2010_001403.jpg "")
+## Parameters
 
-
+All the parameters of the model are in configs/config.yml.
 
 ## Weights
 
-The trained weights can be found at:
+The trained weights can be found here:
 
-https://drive.google.com/open?id=1JXfM5X0aihv2d_4WN8_bIvzrfhB0Me5k
+https://drive.google.com/drive/folders/1O8KLZa1AABlLS6DlkkzHOgPqvT89GB_9?usp=sharing
 
 
-You can train the model with different backbones (resnet, xception, drn, mobilenet), this model has been trained with resnet backbone
+The model can be trained with different backbones (resnet, xception, drn, mobilenet). The weights on the Drive has been trained with the resnet backbone, so if you want to use another backbone you need to train from scratch (although the backbone weights are pre-trained on ImageNet).
 
 
 ## Train
@@ -69,65 +69,53 @@ To train a model run:
 python main.py -c configs/config.yml --train
 ```
 
-If you set "weights_initialization" in config.yml you can use a pretrained model to inizialize the weights, usually for restoring the training after an interruption.  
+You can set "weights_initialization" to "true" in config.yml, in order to restore the training after an interruption.  
 
-During training the best and last snapshots can be stored if you set those options in "callbacks" in config.yml.
+During training the best and last snapshots can be stored if you set those options in "training" in config.yml.
 
 
 ## Inference 
 
-To predict on the full test set run: 
+To predict on the full test set run and get the metrics do: 
 
 ```
 python main.py -c configs/config.yml --predict_on_test
 ```
 
-
-To predict on a single image you can run:
+In "./test_images/" there are some images that can be used for testing the model. To predict on a single image you can run:
 
 ```
-python main.py -c configs/config.yml --predict --filename test_images/test_images/2010_004856.jpg
+python main.py -c configs/config.yml --predict --filename test_images/068834.jpg
 ```
 
-In "./test_images/" there are some images that can be used for testing the model. 
+You can also check the "inference.ipynb" notebook for visual assessing the predictions.
 
 
 ## Results
 
-Here is an example of prediction:
+Here is an example of the results:
 
-![picture alt](https://github.com/giovanniguidi/FCN-keras/blob/master/figures/pred_1.jpg "")
+![picture alt](https://github.com/giovanniguidi/deeplabV3_Pytorch/blob/master/docs/sample.jpg "")
 
-Check "inference.ipynb" in notebooks for a visual assessment of the prediction.
 
-On the test set we get this metrics (see https://arxiv.org/pdf/1411.4038.pdf for the definition):
+On the test set we get this metrics:
 
 ```
-pixel accuracy: 0.81
-mean accuracy: 0.35
-mean IoU: 0.27
-freq weighted mean IoU: 0.69
+accuracy: 0.84
+accuracy per class: 0.47
+mean IoU: 0.34
+freq weighted IoU: 0.79
 ````
+
 
 ## Train on other data
 
-This implementation can be easily extended to other dataset. The expected input are .jpg images, and the labels must be in .png format, with 1 channel shape (y_size, x_size) and value corresponding to the desired class
+This implementation can be easily extended to other dataset. The expected input are .jpg images, and the labels must be in .png format, with 1 channel shape (y_size, x_size) and pixel value corresponding to the target class. In principle you only need to modify deepfashion.py file in data_generators.  
  
-
-## Technical details
-
-Images are normalized between -1 and 1.
-
-Data can be augmented by flipping, translating, and changing random_brightness and random_saturation.
-
-
-## To do
-
-- [x] 
-
 
 ## References
 
 
 \[1\] [Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation](https://arxiv.org/pdf/1802.02611.pdf)
+
 \[2\] [Rethinking Atrous Convolution for Semantic Image Segmentation](https://arxiv.org/pdf/1706.05587.pdf)

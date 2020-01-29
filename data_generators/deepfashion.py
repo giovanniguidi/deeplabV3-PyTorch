@@ -56,6 +56,11 @@ class DeepFashionSegmentation(Dataset):
             self.images.append(os.path.join(self._image_dir, item['image']))
             self.categories.append(os.path.join(self._cat_dir, item['annotation']))
 
+        #be sure that total dataset size is divisible by 2
+        if len(self.images) % 2 != 0:
+            self.images.append(os.path.join(self._image_dir, item['image']))
+            self.categories.append(os.path.join(self._cat_dir, item['annotation']))
+
         assert (len(self.images) == len(self.categories))
 #        print(self.images[0])
 #        print(len(self.images))
