@@ -11,7 +11,7 @@ feature maps (see the image below and the paper for details).
 
 <p align="center">
   <img src="https://github.com/giovanniguidi/deeplabV3_Pytorch/blob/master/docs/deeplab.png">
-  Fig. 1: DeepLabV3+ model (source Chen et al. 2018)
+  <i>Fig. 1: DeepLabV3+ model (source Chen et al. 2018)</i>
 </p>
 
 
@@ -100,7 +100,7 @@ Here is an example of the results:
 
 <p align="center">
   <img src="https://github.com/giovanniguidi/deeplabV3_Pytorch/blob/master/docs/sample.png">
-  Fig. 2: Prediction on DeepFashion2
+  <i>Fig. 2: Prediction on DeepFashion2</i>
 </p>
 
 On the test set we get this metrics:
