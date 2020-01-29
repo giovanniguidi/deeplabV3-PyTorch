@@ -96,7 +96,12 @@ You can also check the "inference.ipynb" notebook for visual assessing the predi
 Here is an example of the results:
 
 ![picture alt](https://github.com/giovanniguidi/deeplabV3_Pytorch/blob/master/docs/sample.png "")
+*Fig. 2: Prediction on DeepFashion2*
 
+<p align="center">
+  <img src="https://github.com/giovanniguidi/deeplabV3_Pytorch/blob/master/docs/sample.png">
+  This is an image
+</p>
 
 On the test set we get this metrics:
 
